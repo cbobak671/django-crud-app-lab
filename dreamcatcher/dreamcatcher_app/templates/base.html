@@ -16,10 +16,11 @@
     <header>
       <div class="header-logo-container">
         <a href="/">
-          <img src="{% static 'images/dreamcatcher-svgrepo-com.svg' %}" alt="The Dream Catcher Logo" />
+          <img src="{% static 'images/dreamcatcher-svgrepo-com.svg' %}" alt="The Dream Catcher Logo" height='150px' width='100px' />
         </a>
-        <div>Dream Catcher</div>
+        
       </div>
+      <div class='logo-title'>Dream Catcher</div>
       <nav>
         <ul>
           {% if user.is_authenticated %}
