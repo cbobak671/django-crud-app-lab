@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/dreams/dream-detail.css' %}" />
+{% endblock %} {% block content %}
+<section class="dream-container">
+  <div class="dream-img">
+    <img
+      src="{% static 'images/dreamcatcher-svgrepo-com (3).svg' %}"
+      alt="A dream catcher"
+    />
+  </div>
+  <div class="dream-details">
+    <h1>{{ dream.title }}</h1>
+    <h2>A {{ dream.category }}.</h2>
+    <p>{{ dream.description }}</p>
+    <div class="dream-actions">
+      <a href="{% url 'dream-update' dream.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'dream-delete' dream.id %}" class="btn danger">Delete</a>
+    </div>
+  </div>
+</section>
+<div class="dream-history-container">
+  <section class="dream-history">
+    <div class="subsection-title">
+      <h2>Dream History</h2>
+
+      <img
+        src="{% static 'images/dreamcatcher-svgrepo-com (3).svg' %}"
+        alt="A dreamcatcher"
+      />
+      <img
+        src="{% static 'images/dreamcatcher-svgrepo-com (3).svg' %}"
+        alt="A dreamcatcher"
+      />
+      <img
+        src="{% static 'images/dreamcatcher-svgrepo-com (3).svg' %}"
+        alt="A dreamcatcher"
+      />
+    </div>
+    <h3>Add Dream History</h3>
+    <form
+      action="{% url 'add-dreamhistory' dream.id %}"
+      method="post"
+      class="subsection-content"
+      autocomplete="off"
+    >
+      {% csrf_token %} {{ dreamhistory_form.as_p }}
+      <button type="submit" class="btn submit">Add History</button>
+    </form>
+    {% if dream.dreamhistory.set_all.count %}
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Tag</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dreamhistory in dream.dreamhistory.set_all %}
+        <tr>
+          <td>{{dreamhistory.date}}</td>
+          <td>{{dreamhistory.get_tag_display}}</td>
+          <td>{{dreamhistory.description}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="subsection-content">
+      <p>{{ dream.title }} has no history!</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

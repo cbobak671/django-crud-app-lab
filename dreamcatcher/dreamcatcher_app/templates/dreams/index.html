@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/dreams/dream-index.css' %}" />
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Dreams</h1>
+  <img
+    src="{% static 'images/dreamcatcher-svgrepo-com (1).svg' %}"
+    alt="Dreamcatcher 1"
+  />
+  <img
+    src="{% static 'images/dreamcatcher-svgrepo-com (2).svg' %}"
+    alt="Dreamcatcher 2"
+  />
+  <img
+    src="{% static 'images/dreamcatcher-svgrepo-com (3).svg' %}"
+    alt="Dreamcatcher 3"
+  />
+  <img
+    src="{% static 'images/dreamcatcher-svgrepo-com (4).svg' %}"
+    alt="Dreamcatcher 4"
+  />
+</section>
+
+<section class="card-container">
+  {% for dream in dreams %}
+  <div class="card">
+    <a href="{% url 'dream-detail' dream.id %}">
+      <div class="card-content">
+        <div class="card-img-container">
+          <img
+            src="{% static 'images/dreamcatcher-svgrepo-com (5).svg' %}"
+            alt="Dream Catcher Large"
+          />
+        </div>
+        <h2 class="card-title">{{ dream.title }}</h2>
+        <p>A {{ dream.category }}.</p>
+        <p><small>{{ dream.description }}</small></p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
